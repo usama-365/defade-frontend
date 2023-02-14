@@ -1,0 +1,41 @@
+.navigation {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 1.6rem;
+  font-size: 1.6rem;
+
+  &__logo {
+    color: var(--color-accent);
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+    text-transform: uppercase;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

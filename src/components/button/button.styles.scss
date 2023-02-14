@@ -1,0 +1,27 @@
+.button {
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &--accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+  }
+
+  &--black {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
+  &--gray {
+    background-color: var(--color-gray);
+    color: var(--color-white);
+  }
+
+  &--white {
+    background-color: var(--color-white);
+    color: var(--color-black);
+  }
+}

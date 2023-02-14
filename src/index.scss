@@ -1,0 +1,25 @@
+:root {
+  --color-black: #222831;
+  --color-gray: #393E46;
+  --color-white: #EEEEEE;
+  --color-accent: #00ADB5;
+}
+
+*, *::before, *::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}

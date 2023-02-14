@@ -4,6 +4,12 @@
   border-radius: 6px;
   cursor: pointer;
   text-transform: uppercase;
+  font-weight: 700;
+
+  &--large {
+    padding: 1.6rem 3.2rem;
+    font-size: 2rem;
+  }
 
   &--accent {
     background-color: var(--color-accent);

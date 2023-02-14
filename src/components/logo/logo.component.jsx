@@ -1,5 +1,5 @@
 import {UilChannel} from "@iconscout/react-unicons";
-import "./container.styles.scss";
+import "./logo.styles.scss";
 
 export const Logo = function () {
     return (

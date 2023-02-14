@@ -8,7 +8,7 @@ export const Navigation = function () {
     return (
         <>
             <nav className="navigation">
-                <Container className="navigation__container">
+                <Container className="navigation__container" limitWidth={false}>
                     <Link to="/"><Logo/></Link>
                     <ul className="navigation__links">
                         <li className="navigation__item"><a href="#" className="navigation__link">About Us</a></li>
@@ -16,8 +16,7 @@ export const Navigation = function () {
                         <li className="navigation__item"><a href="#" className="navigation__link">Contact Us</a></li>
                     </ul>
                     <div className="navigation__buttons">
-                        <Button buttonStyle={BUTTON_STYLES.accent}>Login</Button>
-                        <Button buttonStyle={BUTTON_STYLES.white}>Sign Up</Button>
+                        <Button buttonStyle={BUTTON_STYLES.accent}>Protect yourself now</Button>
                     </div>
                 </Container>
             </nav>

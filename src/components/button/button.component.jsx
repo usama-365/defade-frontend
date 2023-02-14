@@ -7,8 +7,8 @@ export const BUTTON_STYLES = {
     white: "white"
 }
 
-export const Button = function ({children, buttonStyle}) {
+export const Button = function ({children, buttonStyle=BUTTON_STYLES.accent, large=false}) {
     return (
-        <button className={`button button--${buttonStyle}`}>{children}</button>
+        <button className={`button button--${buttonStyle} ${large && 'button--large'}`}>{children}</button>
     );
 }

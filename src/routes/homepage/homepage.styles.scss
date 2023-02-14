@@ -1,0 +1,32 @@
+.hero {
+  background-color: var(--color-black);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding: 10rem 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__text {
+    line-height: 0.9;
+    font-size: 7rem;
+    margin-bottom: 4rem;
+
+    &--white {
+      color: var(--color-white);
+    }
+  }
+
+  &__subtext {
+    color: var(--color-accent);
+    font-size: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  &__video {
+    width: 100%;
+
+  }
+}

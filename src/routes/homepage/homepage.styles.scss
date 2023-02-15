@@ -63,6 +63,10 @@
 
 .cta {
   color: var(--color-white);
-  background-color: var(--color-gray);
+  background-color: var(--color-black);
   padding: 5rem 0;
+  &__container {
+    padding: 5rem;
+    background-color: var(--color-gray);
+  }
 }

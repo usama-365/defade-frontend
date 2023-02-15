@@ -69,7 +69,7 @@ export const Homepage = function () {
             </section>
             <section className="cta" id="cta">
                 <Container>
-                    <Center>
+                    <Center className="cta__container">
                         <H2>Protect yourself today</H2>
                         <Button large={true} buttonStyle={BUTTON_STYLES.accent}>Analyze video</Button>
                     </Center>

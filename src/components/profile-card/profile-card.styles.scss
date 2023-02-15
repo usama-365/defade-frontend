@@ -1,0 +1,51 @@
+.profile-card {
+  background-color: var(--color-gray);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &__img {
+    width: 100%;
+    filter: grayscale(100%);
+    display: block;
+    &:hover {
+      animation: ease-in zoom 10s ;
+    }
+  }
+
+  &__text {
+    background-color: var(--color-black);
+    padding: 1rem;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 100;
+    font-size: 2rem;
+  }
+
+  &__name {
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+
+  }
+
+  &__reg-no {
+    letter-spacing: 2rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(100%);
+  }
+  50% {
+    transform: scale(110%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}

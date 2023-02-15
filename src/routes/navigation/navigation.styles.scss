@@ -1,8 +1,12 @@
 .navigation {
   background-color: var(--color-black);
+  z-index: 1000;
   color: var(--color-white);
   padding: 1.6rem 0;
   font-size: 1.6rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
 
   &__logo {
     color: var(--color-accent);
@@ -16,6 +20,7 @@
 
   &__links {
     display: flex;
+    align-items: center;
     gap: 2rem;
   }
 

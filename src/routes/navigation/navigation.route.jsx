@@ -1,20 +1,34 @@
-import {Link} from "react-router-dom";
 import "./navigation.styles.scss";
-import {Container} from "../../components/container/container.component";
-import {Logo} from "../../components/logo/logo.component";
-import {Button, BUTTON_STYLES} from "../../components/button/button.component";
+
+import {Container, Nav, Navbar} from "react-bootstrap";
+import {UilChannel} from "@iconscout/react-unicons";
+import {useContext} from "react";
+import {UserContext} from "../../contexts/user.context";
+import {Link} from "react-router-dom";
 
 export const Navigation = function () {
+    const {user} = useContext(UserContext);
     return (
-        <nav className="navigation">
-            <Container className="navigation__container" limitWidth={false}>
-                <a href="#hero"><Logo/></a>
-                <ul className="navigation__links">
-                    <li className="navigation__item"><a href="#how" className="navigation__link">How it works</a></li>
-                    <li className="navigation__item"><a href="#about" className="navigation__link">about us</a></li>
-                    <Button buttonStyle={BUTTON_STYLES.accent}>Protect yourself now</Button>
-                </ul>
-            </Container>
-        </nav>
+        <>
+            <Navbar bg="dark" variant="dark">
+                <Container>
+                    <Navbar.Brand href="#">
+                        <Link to={"/"}><UilChannel className={"text-primary"} size={32}/></Link>
+                    </Navbar.Brand>
+                    <Nav className="me-auto">
+                        <Nav.Link href="#"><Link className="text-white" to={"about"}>About Us</Link></Nav.Link>
+                        {user ? (
+
+                            <Nav.Link href="#"><Link className="text-white" to={"signout"}>Sign Out</Link></Nav.Link>
+                        ) : (
+                            <>
+                                <Nav.Link href="#"><Link className="text-white" to={"signin"}>Sign In</Link></Nav.Link>
+                                <Nav.Link href="#"><Link className="text-white" to={"signup"}>Sign Up</Link></Nav.Link>
+                            </>
+                        )}
+                    </Nav>
+                </Container>
+            </Navbar>
+        </>
     );
 }

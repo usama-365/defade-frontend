@@ -1,3 +1,13 @@
+$theme-colors: (
+        'dark': #222831,
+        'secondary': #393E46,
+        'primary': #00ADB5
+);
+@import '~bootstrap/scss/bootstrap';
+
+.height-control {
+  min-height: 100vh;
+}
 :root {
   --color-black: #222831;
   --color-gray: #393E46;
@@ -13,7 +23,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 62.5%;
+  //font-size: 62.5%;
 }
 
 body {

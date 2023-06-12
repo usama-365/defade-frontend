@@ -7,6 +7,8 @@ import {AboutPage} from "./routes/about/about.route";
 import {SignInPage} from "./routes/signin/signin.route";
 import {SignOutPage} from "./routes/signout/signout.route";
 import {SignUpPage} from "./routes/signup/signup.route";
+import {ImagesPage} from "./routes/images/images.route";
+import {ImagesContextProvider} from "./contexts/images.context";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: 'signup',
                 element: <SignUpPage/>
+            },
+            {
+                path: 'image',
+                element: <ImagesPage/>
             }
         ]
     }
@@ -55,7 +61,9 @@ const router = createBrowserRouter([
 function App() {
     return (
         <UserContextProvider>
-            <RouterProvider router={router}/>
+            <ImagesContextProvider>
+                <RouterProvider router={router}/>
+            </ImagesContextProvider>
         </UserContextProvider>
     );
 }

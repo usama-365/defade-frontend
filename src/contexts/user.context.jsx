@@ -1,6 +1,6 @@
 import {createContext, useEffect, useState} from "react";
 
-const hostname = 'https://ec2-13-232-134-9.ap-south-1.compute.amazonaws.com';
+export const hostname = 'https://ec2-13-232-134-9.ap-south-1.compute.amazonaws.com';
 const signInURL = `${hostname}/api/users/login`;
 const signUpURL = `${hostname}/api/users/register`;
 const signOutURL = `${hostname}/api/users/logout`;

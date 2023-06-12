@@ -18,8 +18,12 @@ export const Navigation = function () {
                     <Nav className="me-auto">
                         <Nav.Link href="#"><Link className="text-white" to={"about"}>About Us</Link></Nav.Link>
                         {user ? (
-
-                            <Nav.Link href="#"><Link className="text-white" to={"signout"}>Sign Out</Link></Nav.Link>
+                            <>
+                                <Nav.Link href="#"><Link className="text-white" to={"image"}>Image
+                                    Check</Link></Nav.Link>
+                                <Nav.Link href="#"><Link className="text-white" to={"signout"}>Sign
+                                    Out</Link></Nav.Link>
+                            </>
                         ) : (
                             <>
                                 <Nav.Link href="#"><Link className="text-white" to={"signin"}>Sign In</Link></Nav.Link>

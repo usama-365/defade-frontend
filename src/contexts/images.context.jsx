@@ -33,7 +33,7 @@ export const ImagesContextProvider = function ({children}) {
                 .then(console.log)
                 .finally(() => setImageBeingLoaded(false))
         }
-    }, [user, result]);
+    }, [user, result, imageBeingChecked]);
 
     const checkImage = async (imageFile) => {
         setImageBeingChecked(true);

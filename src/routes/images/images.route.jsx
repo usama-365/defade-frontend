@@ -38,7 +38,7 @@ export const ImagesPage = function () {
                                         <Form.Group className="mb-3">
                                             <Form.Label className={"text-white"} htmlFor="image">Please select an
                                                 image</Form.Label>
-                                            <Form.Control onChange={onImageChangeHandler} type="file" name="image"
+                                            <Form.Control onChange={onImageChangeHandler} accept="image/jpeg, image/jpg" type="file" name="image"
                                                           id={"image"}/>
                                         </Form.Group>
                                         <Button type={"submit"} variant={"primary"}>{imageBeingChecked &&

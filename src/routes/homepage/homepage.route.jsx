@@ -1,42 +1,47 @@
 import "./homepage.styles.scss";
-import GroupMemberImage1 from "../../assets/us/1.jpg";
-import GroupMemberImage2 from "../../assets/us/2.jpg";
-import GroupMemberImage3 from "../../assets/us/3.jpg";
-import {Button, Spinner} from "react-bootstrap";
+import DeepFakeVideo from "../../assets/vid.mp4"
+import {Button, ButtonGroup, Col, Container, Row, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {UilCheckSquare} from "@iconscout/react-unicons";
+import {useContext} from "react";
+import {UserContext} from "../../contexts/user.context";
 
-
-
-const steps = [
-    {
-        title: "Upload",
-        description: "Upload your video on our servers"
-    },
-    {
-        title: "Wait",
-        description: "Wait for our algorithm to process your video"
-    },
-    {
-        title: "Done",
-        description: `You'll be informed of the authenticity of video`
-    }
-]
+const checkPoints = [
+    "Unmasking Deep Fakes",
+    "Empowering Security",
+    "Protecting Identity"
+];
 
 export const Homepage = function () {
+    const {user} = useContext(UserContext);
     return (
-        <div className={"h-100 d-flex flex-column align-items-center justify-content-center"}>
-            <h1 className={"text-primary"}>Deep Fake Detection</h1>
-            <h4 className={"text-white mb-4"}>Unmasking deception, Empowering Security</h4>
-            <Link to={"about"}>
-                <Button
-                    // className="d-flex align-items-center justify-content-center gap-4"
-                    size={"lg"}
-                    variant="dark">
-                    <Spinner as={"span"} animation={"grow"} size={"sm"} variant={"primary"}/> Who we are?
+        <Container>
+            <Row>
+                <Col lg={6}>
+                    <video className={"w-100"} loop={true} muted autoPlay={true} src={DeepFakeVideo}/>
+                </Col>
+                <Col className={"align-self-center justify-content-center pt-lg-0 pt-3"} lg={6}>
+                    <h1 className={"text-primary mb-3"}>Deep Fake Detection</h1>
+                    {checkPoints.map(subtext => (
+                        <p className="d-flex gap-1 text-white align-items-center">
+                            <UilCheckSquare className={"text-primary"}/>{subtext}<br/>
+                        </p>
+                    ))}
+                    <div className={"d-flex gap-2"}>
+                        <Link to={user ? "/image" : "/signin"}>
+                            <Button variant="dark">
+                                <Spinner as={"span"} animation={"grow"} size={"sm"} variant={"primary"}/> Detect
+                            </Button>
+                        </Link>
+                        <Link to={"/howitworks"}>
+                            <Button variant="primary">
+                                Learn More
+                            </Button>
+                        </Link>
+                    </div>
 
-                </Button>
-            </Link>
-
-        </div>
+                </Col>
+            </Row>
+        </Container>
     );
 }

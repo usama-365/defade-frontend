@@ -1,6 +1,7 @@
 import {Button, Card, Container, Form, Spinner} from "react-bootstrap";
 import {useContext, useState} from "react";
 import {UserContext} from "../../contexts/user.context";
+import {Link} from "react-router-dom";
 
 export const SignUpPage = function () {
     const {isAuthenticated, isAuthenticating, user, signUp, isSigningUp} = useContext(UserContext);
@@ -54,7 +55,11 @@ export const SignUpPage = function () {
                     <h1>You are logged in! 😊</h1>
                 ) : (
                     <Container>
-                        <Card className="bg-dark p-5">
+                        <Card className="bg-dark mb-2">
+                            <Card.Header className={"text-white-50 p-4"}>
+                                Already have an account? <Link className={"link-primary"} to={"/signin"}>Sign In</Link> instead.
+                            </Card.Header>
+                            <Card.Body className={"p-4"}>
                             <Form onSubmit={onSubmitHandler}>
                                 <Form.Group className="mb-3">
                                     <Form.Label className={"text-white"} htmlFor="name">Name</Form.Label>
@@ -71,7 +76,7 @@ export const SignUpPage = function () {
                                     <Form.Control onChange={onPasswordChangeHandler} type="password" name="password"
                                                   value={password} placeholder={"xxxxxxxx"} id={"password"}/>
                                 </Form.Group>
-                                <Form.Group className="mb-3">
+                                <Form.Group className="mb-4">
                                     <Form.Label className={"text-white"} htmlFor="gender">Gender (M, F, O)</Form.Label>
                                     <Form.Control onChange={onGenderChangeHandler} type="gender" name="gender"
                                                   value={gender} placeholder={"G"} id={"gender"}/>
@@ -79,7 +84,9 @@ export const SignUpPage = function () {
                                 <Button type={"submit"} variant={"primary"}>{isSigningUp && <Spinner size={"sm"}/>} Sign
                                     Up</Button>
                             </Form>
+                            </Card.Body>
                         </Card>
+                        <Link to={"/"}><Button variant={"dark"}>&larr; Go back to home</Button></Link>
                     </Container>
                 )
             )}

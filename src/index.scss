@@ -22,6 +22,7 @@ $theme-colors: (
 }
 
 html {
+  background-color: var(--color-black);
   scroll-behavior: smooth;
   //font-size: 62.5%;
 }

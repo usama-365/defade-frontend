@@ -1,6 +1,7 @@
 import {useContext, useState} from "react";
 import {UserContext} from "../../contexts/user.context";
 import {Button, Card, Container, Form, Spinner} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export const SignInPage = function () {
     const {isAuthenticated, isAuthenticating, user, signIn, isSigningIn} = useContext(UserContext);
@@ -35,22 +36,29 @@ export const SignInPage = function () {
                     <h1>You are logged in! 😊</h1>
                 ) : (
                     <Container>
-                        <Card className="bg-dark p-5">
-                            <Form onSubmit={onSubmitHandler}>
-                                <Form.Group className="mb-5">
-                                    <Form.Label className={"text-white"} htmlFor="email">Email</Form.Label>
-                                    <Form.Control onChange={onEmailChangeHandler} type="email" name="email"
-                                                  value={email} placeholder={"someone@example.com"} id={"email"}/>
-                                </Form.Group>
-                                <Form.Group className="mb-5">
-                                    <Form.Label className={"text-white"} htmlFor="password">Password</Form.Label>
-                                    <Form.Control onChange={onPasswordChangeHandler} type="password" name="password"
-                                                  value={password} placeholder={"xxxxxxxx"} id={"password"}/>
-                                </Form.Group>
-                                <Button type={"submit"} variant={"primary"}>{isSigningIn && <Spinner size={"sm"}/>} Sign
-                                    In</Button>
-                            </Form>
+                        <Card className="bg-dark mb-2">
+                            <Card.Header className={"text-white-50 p-4"}>
+                                Don't have an account? <Link className={"link-primary"} to={"/signup"}>Sign Up</Link> instead.
+                            </Card.Header>
+                            <Card.Body className={"p-4"}>
+                                <Form onSubmit={onSubmitHandler}>
+                                    <Form.Group className="mb-4">
+                                        <Form.Label className={"text-white"} htmlFor="email">Email</Form.Label>
+                                        <Form.Control onChange={onEmailChangeHandler} type="email" name="email"
+                                                      value={email} placeholder={"someone@example.com"} id={"email"}/>
+                                    </Form.Group>
+                                    <Form.Group className="mb-4">
+                                        <Form.Label className={"text-white"} htmlFor="password">Password</Form.Label>
+                                        <Form.Control onChange={onPasswordChangeHandler} type="password" name="password"
+                                                      value={password} placeholder={"xxxxxxxx"} id={"password"}/>
+                                    </Form.Group>
+                                    <Button type={"submit"} variant={"primary"}>{isSigningIn &&
+                                        <Spinner size={"sm"}/>} Sign
+                                        In</Button>
+                                </Form>
+                            </Card.Body>
                         </Card>
+                        <Link to={"/"}><Button variant={"dark"}>&larr; Go back to home</Button></Link>
                     </Container>
                 )
             )}

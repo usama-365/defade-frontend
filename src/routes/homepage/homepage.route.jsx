@@ -1,6 +1,6 @@
 import "./homepage.styles.scss";
 import DeepFakeVideo from "../../assets/vid.mp4"
-import {Button, ButtonGroup, Col, Container, Row, Spinner} from "react-bootstrap";
+import {Button, Col, Container, Row, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {UilCheckSquare} from "@iconscout/react-unicons";
 import {useContext} from "react";
@@ -23,7 +23,7 @@ export const Homepage = function () {
                 <Col className={"align-self-center justify-content-center pt-lg-0 pt-3"} lg={6}>
                     <h1 className={"text-primary mb-3"}>Deep Fake Detection</h1>
                     {checkPoints.map(subtext => (
-                        <p className="d-flex gap-1 text-white align-items-center">
+                        <p key={subtext} className="d-flex gap-1 text-white align-items-center">
                             <UilCheckSquare className={"text-primary"}/>{subtext}<br/>
                         </p>
                     ))}
@@ -39,7 +39,6 @@ export const Homepage = function () {
                             </Button>
                         </Link>
                     </div>
-
                 </Col>
             </Row>
         </Container>

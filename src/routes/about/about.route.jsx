@@ -31,7 +31,7 @@ export const AboutPage = function () {
         <Container>
             <Row>
                 {aboutProfiles.map(({name, regNo, description, image}) => (
-                    <Col md={4}>
+                    <Col key={regNo} md={4}>
                         <Card className="bg-dark text-primary mb-3">
                             <Card.Img style={{filter: 'grayscale(100%)'}} variant="top" src={image} loading={"lazy"}/>
                             <Card.Body>
@@ -46,8 +46,8 @@ export const AboutPage = function () {
                 ))}
             </Row>
             <div className={"d-flex gap-2"}>
-            <Link to={"/howitworks"}><Button className={"mr-2"} variant={"dark"}>&larr; How it works</Button></Link>
-            <Link to={"/"}><Button variant={"primary"}>&#9750; Go back to home</Button></Link>
+                <Link to={"/howitworks"}><Button className={"mr-2"} variant={"dark"}>&larr; How it works</Button></Link>
+                <Link to={"/"}><Button variant={"primary"}>&#9750; Go back to home</Button></Link>
             </div>
         </Container>
     );

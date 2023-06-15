@@ -8,7 +8,7 @@ export const ImagesContext = createContext({
     images: {},
     imageBeingChecked: false,
     imagesBeingLoaded: false,
-    checkImage: (imagePath) => {}
+    checkImage: imagePath => imagePath
 });
 
 export const ImagesContextProvider = function ({children}) {
@@ -51,14 +51,13 @@ export const ImagesContextProvider = function ({children}) {
                 const res = await response.json();
                 if (res?.result) {
                     setResult(res.result);
-                }
-                else
+                } else
                     alert(JSON.stringify(res));
             } else {
                 alert("Image upload failed")
             }
         } catch (error) {
-            alert("Error occurred during image upload:", error);
+            alert(`Error occurred during image upload: ${error}`);
         }
         setImageBeingChecked(false);
     }

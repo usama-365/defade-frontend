@@ -1,14 +1,13 @@
 import {useContext, useState} from "react";
 import {UserContext} from "../../contexts/user.context";
 import {ImagesContext} from "../../contexts/images.context";
-import {Button, Card, Carousel, CarouselItem, Col, Container, Form, Row, Spinner} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 
 export const ImagesPage = function () {
 
     const {user, isAuthenticating} = useContext(UserContext);
     const {images, imageBeingChecked, imagesBeingLoaded, checkImage, result} = useContext(ImagesContext);
     const [imageFile, setImageFile] = useState(null);
-    // isAuthenticated();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -32,13 +31,14 @@ export const ImagesPage = function () {
                 user ? (
                     <>
                         <Container>
-                            <Card className="bg-dark p-5 my-5">
+                            <Card className="bg-dark p-4 mb-2">
                                 <Card.Body>
                                     <Form onSubmit={onSubmitHandler}>
                                         <Form.Group className="mb-3">
                                             <Form.Label className={"text-white"} htmlFor="image">Please select an
                                                 image</Form.Label>
-                                            <Form.Control onChange={onImageChangeHandler} accept="image/jpeg, image/jpg" type="file" name="image"
+                                            <Form.Control onChange={onImageChangeHandler} accept="image/jpeg, image/jpg"
+                                                          type="file" name="image"
                                                           id={"image"}/>
                                         </Form.Group>
                                         <Button type={"submit"} variant={"primary"}>{imageBeingChecked &&
@@ -53,7 +53,8 @@ export const ImagesPage = function () {
                         </Container>
                         <Container>
                             <Card className="bg-dark p-5">
-                                <Card.Title><h1 className="text-primary text-center">Your Previous Uploads</h1></Card.Title>
+                                <Card.Title><h1 className="text-primary text-center">Your Previous Uploads</h1>
+                                </Card.Title>
                                 <Card.Body>
                                     {imagesBeingLoaded ? (
                                         <Spinner className="text-center" size={"lg"}/>
@@ -61,8 +62,13 @@ export const ImagesPage = function () {
                                         <Row>
                                             {
                                                 Object.values(images).map(image => (
-                                                    <Col className="d-flex align-items-center justify-content-center flex-column gap-2">
-                                                        <img className="my-auto" style={{width: "200px", height: "200px", objectFit: "cover"}} src={`https://${image.url}`} />
+                                                    <Col key={image.url}
+                                                         className="d-flex align-items-center justify-content-center flex-column gap-2">
+                                                        <img className="my-auto" style={{
+                                                            width: "200px",
+                                                            height: "200px",
+                                                            objectFit: "cover"
+                                                        }} src={`https://${image.url}`}/>
                                                         <h2 className={"text-uppercase text-center text-primary"}>{image.result}</h2>
                                                     </Col>
                                                 ))

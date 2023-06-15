@@ -1,22 +1,31 @@
 import {createContext, useEffect, useState} from "react";
 
-export const hostname = 'https://ec2-13-232-134-9.ap-south-1.compute.amazonaws.com';
+export const hostname = 'https://defadebackend.online';
 const signInURL = `${hostname}/api/users/login`;
 const signUpURL = `${hostname}/api/users/register`;
 const signOutURL = `${hostname}/api/users/logout`;
 const userDetailURL = `${hostname}/api/users/user`;
 
-export const UserContext = createContext({
+const DEFAULT_VALUES = {
     user: null,
     jwt: '',
-    signOut: () => null,
-    signIn: (email, password) => null,
-    signUp: (name, email, password, gender) => null,
-    isAuthenticated: () => null,
     isSigningIn: false,
     isSigningOut: false,
     isSigningUp: false,
     isAuthenticating: false
+}
+
+export const UserContext = createContext({
+    user: DEFAULT_VALUES.user,
+    jwt: DEFAULT_VALUES.jwt,
+    signOut: () => null,
+    signIn: (email, password) => null,
+    signUp: (name, email, password, gender) => null,
+    isAuthenticated: () => null,
+    isSigningIn: DEFAULT_VALUES.isSigningIn,
+    isSigningOut: DEFAULT_VALUES.isSigningOut,
+    isSigningUp: DEFAULT_VALUES.isSigningUp,
+    isAuthenticating: DEFAULT_VALUES.isAuthenticating,
 });
 
 const makePostRequest = function (url, body) {
@@ -37,16 +46,16 @@ const makePostRequest = function (url, body) {
 const getUserFromJWT = async function () {
     const res = await fetch(userDetailURL, {credentials: 'include',});
     return await res.json();
+
 }
 
 export const UserContextProvider = function ({children}) {
-    const [jwt, setJwt] = useState('');
-    const [user, setUser] = useState(null);
-    const [isSigningIn, setIsSigningIn] = useState(false);
-    const [isSigningOut, setIsSigningOut] = useState(false);
-    const [isSigningUp, setIsSigningUp] = useState(false);
-    const [isAuthenticating, setIsAuthenticating] = useState(false);
-
+    const [jwt, setJwt] = useState(DEFAULT_VALUES.jwt);
+    const [user, setUser] = useState(DEFAULT_VALUES.user);
+    const [isSigningIn, setIsSigningIn] = useState(DEFAULT_VALUES.isSigningIn);
+    const [isSigningOut, setIsSigningOut] = useState(DEFAULT_VALUES.isSigningOut);
+    const [isSigningUp, setIsSigningUp] = useState(DEFAULT_VALUES.isSigningUp);
+    const [isAuthenticating, setIsAuthenticating] = useState(DEFAULT_VALUES.isAuthenticating);
 
 
     const isAuthenticated = async () => {
@@ -65,7 +74,7 @@ export const UserContextProvider = function ({children}) {
     }
 
     useEffect(() => {
-        isAuthenticated()
+        isAuthenticated();
     }, []);
 
     const signOutHandler = () => {
@@ -79,7 +88,6 @@ export const UserContextProvider = function ({children}) {
     const signInHandler = (email, password) => {
         setIsSigningIn(true);
         makePostRequest(signInURL, {email, password})
-            .then(res=> {console.log(res); return res;})
             .then(res => res.json())
             .then(response => {
                 if (response?.jwt) {
@@ -98,7 +106,6 @@ export const UserContextProvider = function ({children}) {
             .then(res => res.json())
             .then(res => {
                 if (res?.email) {
-                    setUser({...res});
                     signInHandler(email, password);
                 } else {
                     alert(JSON.stringify(res));

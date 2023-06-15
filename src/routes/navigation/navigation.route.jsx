@@ -17,12 +17,17 @@ export const Navigation = function () {
                 <Container>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expandBreakPoint}`}/>
                     <Navbar.Brand>
-                        <Link to={"/"}><UilChannel className={`${route === '/' ? 'text-primary' : 'text-white'}`} size={32}/></Link>
+                        <Link to={"/"}><UilChannel className={`${route === '/' ? 'text-primary' : 'text-white'}`}
+                                                   size={32}/></Link>
                     </Navbar.Brand>
-                    <Navbar.Offcanvas id={`offcanvasNavbar-expand-${expandBreakPoint}`} aria-labelledby={`offcanvasNavbarLabel-expand-${expandBreakPoint}`} placement="start" className={"bg-dark"}>
+                    <Navbar.Offcanvas id={`offcanvasNavbar-expand-${expandBreakPoint}`}
+                                      aria-labelledby={`offcanvasNavbarLabel-expand-${expandBreakPoint}`}
+                                      placement="start" className={"bg-dark"}>
                         <Offcanvas.Header className={"bg-primary"} closeButton>
-                            <Offcanvas.Title className="text-dark" id={`offcanvasNavbarLabel-expand-${expandBreakPoint}`}>
-                                <Link to={"/"}><UilChannel className={`${route === '/' ? 'text-dark' : 'text-white'}`} size={32}/></Link>
+                            <Offcanvas.Title className="text-dark"
+                                             id={`offcanvasNavbarLabel-expand-${expandBreakPoint}`}>
+                                <Link to={"/"}><UilChannel className={`${route === '/' ? 'text-dark' : 'text-white'}`}
+                                                           size={32}/></Link>
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>

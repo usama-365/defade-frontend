@@ -2,6 +2,7 @@ import {useContext, useState} from "react";
 import {UserContext} from "../../contexts/user.context";
 import {ImagesContext} from "../../contexts/images.context";
 import {Button, Card, Col, Container, Form, Row, Spinner} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export const ImagesPage = function () {
 
@@ -31,7 +32,11 @@ export const ImagesPage = function () {
                 user ? (
                     <>
                         <Container>
-                            <Card className="bg-dark p-4 mb-2">
+                            <div className={"d-flex gap-2 mb-2"}>
+                                <Link to={"/"}><Button className={"mr-2"} variant={"dark"}>&#9750; Back to Home</Button></Link>
+                                <Link to={"/signout"}><Button>Sign Out</Button></Link>
+                            </div>
+                            <Card className="bg-dark p-3 mb-2">
                                 <Card.Body>
                                     <Form onSubmit={onSubmitHandler}>
                                         <Form.Group className="mb-3">
@@ -50,26 +55,26 @@ export const ImagesPage = function () {
                                     <Spinner size={"lg"}/>}</h1></Card.Footer>
                             </Card>
 
-                        </Container>
-                        <Container>
-                            <Card className="bg-dark p-5">
+                            <Card className="bg-dark p-3">
                                 <Card.Title><h1 className="text-primary text-center">Your Previous Uploads</h1>
                                 </Card.Title>
                                 <Card.Body>
                                     {imagesBeingLoaded ? (
                                         <Spinner className="text-center" size={"lg"}/>
                                     ) : (
-                                        <Row>
+                                        <Row className={"row-gap-3"}>
                                             {
-                                                Object.values(images).map(image => (
-                                                    <Col key={image.url}
-                                                         className="d-flex align-items-center justify-content-center flex-column gap-2">
-                                                        <img className="my-auto" style={{
-                                                            width: "200px",
-                                                            height: "200px",
-                                                            objectFit: "cover"
-                                                        }} src={`https://${image.url}`}/>
-                                                        <h2 className={"text-uppercase text-center text-primary"}>{image.result}</h2>
+                                                Object.values(images).map((image, index) => (
+                                                    <Col lg={2} md={3} sm={4} key={index}>
+                                                        <Card className={"bg-secondary"}>
+                                                            <Card.Img variant={"top"} className="my-auto" style={{
+                                                                width: "100%",
+                                                                height: '200px',
+                                                                objectFit: "cover"
+                                                            }} src={`https://${image.url}`}/>
+                                                            <Card.Footer className={"align-items-center justify-content-center d-flex"}><h4 className={" m-0 p-0 text-primary text-uppercase"}>{image.result}</h4></Card.Footer>
+                                                        </Card>
+
                                                     </Col>
                                                 ))
                                             }

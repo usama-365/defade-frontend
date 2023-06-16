@@ -41,8 +41,7 @@ export const Navigation = function () {
                                     <>
                                         <Link
                                             className={`${route.includes('image') ? 'text-primary' : 'text-white'}`}
-                                            to={"/image"}>Image
-                                            Check</Link>
+                                            to={"/image"}>Media Detection</Link>
                                         <Link
                                             className={`${route.includes('signout') ? 'text-primary' : 'text-white'}`}
                                             to={"/signout"}>Sign

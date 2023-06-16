@@ -13,7 +13,7 @@ export const ImagesPage = function () {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         if (!imageFile)
-            alert("Please select an image")
+            alert("Please select a media file")
         else
             checkImage(imageFile);
         setImageFile(null)
@@ -40,9 +40,8 @@ export const ImagesPage = function () {
                                 <Card.Body>
                                     <Form onSubmit={onSubmitHandler}>
                                         <Form.Group className="mb-3">
-                                            <Form.Label className={"text-white"} htmlFor="image">Please select an
-                                                image</Form.Label>
-                                            <Form.Control onChange={onImageChangeHandler} accept="image/jpeg, image/jpg"
+                                            <Form.Label className={"text-white"} htmlFor="image">Please select a media file</Form.Label>
+                                            <Form.Control onChange={onImageChangeHandler} accept="image/*, video/*"
                                                           type="file" name="image"
                                                           id={"image"}/>
                                         </Form.Group>
@@ -67,11 +66,25 @@ export const ImagesPage = function () {
                                                 Object.values(images).map((image, index) => (
                                                     <Col lg={2} md={3} sm={4} key={index}>
                                                         <Card className={"bg-secondary"}>
-                                                            <Card.Img variant={"top"} className="my-auto" style={{
-                                                                width: "100%",
-                                                                height: '200px',
-                                                                objectFit: "cover"
-                                                            }} src={`https://${image.url}`}/>
+                                                            {
+                                                                [".mp4", ".mkv"].some(extension => image.url.endsWith(extension)) ? (
+                                                                    <video
+                                                                        controls={true}
+                                                                        className="my-auto" style={{
+                                                                        width: "100%",
+                                                                        height: '200px',
+                                                                        objectFit: "cover"
+                                                                    }} src={`https://${image.url}`}
+                                                                    />
+                                                                ) : (
+                                                                    <Card.Img variant={"top"} className="my-auto" style={{
+                                                                        width: "100%",
+                                                                        height: '200px',
+                                                                        objectFit: "cover"
+                                                                    }} src={`https://${image.url}`}/>
+                                                                )
+                                                            }
+
                                                             <Card.Footer className={"align-items-center justify-content-center d-flex"}><h4 className={" m-0 p-0 text-primary text-uppercase"}>{image.result}</h4></Card.Footer>
                                                         </Card>
 

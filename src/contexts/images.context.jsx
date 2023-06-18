@@ -72,7 +72,8 @@ export const ImagesContextProvider = function ({children}) {
                 setImageBeingChecked(false);
                 setResult(mod);
                 const newID = `${Object.keys(darkImages).length + 1}`;
-                setDarkImages({...darkImages, [newID]: {id: newID, result: mod, url: URL.createObjectURL(imageFile)}});
+                const type = imageFile.name.endsWith("mp4") || imageFile.name.endsWith("mkv") ? 'video' : 'image'
+                setDarkImages({...darkImages, [newID]: {id: newID, result: mod, url: URL.createObjectURL(imageFile), type}});
             }, 10000);
         }
     }

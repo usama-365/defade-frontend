@@ -81,7 +81,7 @@ export const ImagesPage = function () {
                                                 Object.values(dark ? darkImages : images).map((image, index) => (
                                                     <Col lg={2} md={3} sm={4} key={index}>
                                                         <Card className={"bg-secondary"}>
-                                                            {
+                                                            { !dark ?
                                                                 [".mp4", ".mkv"].some(extension => image.url.endsWith(extension)) ? (
                                                                     <video
                                                                         controls={true}
@@ -97,7 +97,22 @@ export const ImagesPage = function () {
                                                                         height: '200px',
                                                                         objectFit: "cover"
                                                                     }} src={dark ? image.url : `https://${image.url}`}/>
-                                                                )
+                                                                ) : (image.type === 'video' ? (
+                                                                    <video
+                                                                        controls={true}
+                                                                        className="my-auto" style={{
+                                                                        width: "100%",
+                                                                        height: '200px',
+                                                                        objectFit: "cover"
+                                                                    }} src={dark ? image.url :`https://${image.url}`}
+                                                                    />
+                                                                ) : (
+                                                                    <Card.Img variant={"top"} className="my-auto" style={{
+                                                                        width: "100%",
+                                                                        height: '200px',
+                                                                        objectFit: "cover"
+                                                                    }} src={dark ? image.url : `https://${image.url}`}/>
+                                                                ))
                                                             }
 
                                                             <Card.Footer className={"align-items-center justify-content-center d-flex"}><h4 className={" m-0 p-0 text-primary text-uppercase"}>{image.result}</h4></Card.Footer>

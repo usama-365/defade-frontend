@@ -11,6 +11,7 @@ import {ImagesPage} from "./routes/images/images.route";
 import {ImagesContextProvider} from "./contexts/images.context";
 import {HowItWorksPage} from "./routes/how-it-works/how-it-works.route";
 import {Button} from "react-bootstrap";
+import {ModeContextProvider} from "./contexts/mode.context";
 
 export const router = createBrowserRouter([
     {
@@ -76,9 +77,11 @@ export const router = createBrowserRouter([
 function App() {
     return (
         <UserContextProvider>
-            <ImagesContextProvider>
-                <RouterProvider router={router}/>
-            </ImagesContextProvider>
+            <ModeContextProvider>
+                <ImagesContextProvider>
+                    <RouterProvider router={router}/>
+                </ImagesContextProvider>
+            </ModeContextProvider>
         </UserContextProvider>
     );
 }

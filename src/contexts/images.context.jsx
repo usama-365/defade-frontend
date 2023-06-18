@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {hostname, UserContext} from "./user.context";
+import {ModeContext} from "./mode.context";
 
 const imageAPIEndpoint = `${hostname}/api/image/`;
 
@@ -8,19 +9,22 @@ export const ImagesContext = createContext({
     images: {},
     imageBeingChecked: false,
     imagesBeingLoaded: false,
-    checkImage: imagePath => imagePath
+    checkImage: imagePath => imagePath,
+    darkImages: {}
 });
 
 export const ImagesContextProvider = function ({children}) {
     const {user} = useContext(UserContext);
+    const {dark} = useContext(ModeContext);
 
     const [result, setResult] = useState("");
     const [imageBeingChecked, setImageBeingChecked] = useState(false);
     const [imageBeingLoaded, setImageBeingLoaded] = useState(false);
-    const [images, setImages] = useState(false);
+    const [images, setImages] = useState({});
+    const [darkImages, setDarkImages] = useState({})
 
     useEffect(() => {
-        if (user) {
+        if (user && !dark) {
             setImageBeingLoaded(true);
             fetch(imageAPIEndpoint, {credentials: 'include'})
                 .then(res => res.json())
@@ -30,36 +34,47 @@ export const ImagesContextProvider = function ({children}) {
                     else
                         alert(JSON.stringify(res));
                 })
-                .then(console.log)
                 .finally(() => setImageBeingLoaded(false))
+        } else if (dark) {
+            setImages(false);
         }
-    }, [user, result, imageBeingChecked]);
+    }, [user, result, imageBeingChecked, dark]);
 
-    const checkImage = async (imageFile) => {
+    const checkImage = async (imageFile, mod = null) => {
         setImageBeingChecked(true);
-        try {
-            const formData = new FormData();
-            formData.append("image", imageFile);
+        if (!dark) {
+            try {
+                const formData = new FormData();
+                console.log(imageFile);
+                formData.append("image", imageFile);
 
-            const response = await fetch(imageAPIEndpoint, {
-                method: "POST",
-                body: formData,
-                credentials: "include"
-            });
+                const response = await fetch(imageAPIEndpoint, {
+                    method: "POST",
+                    body: formData,
+                    credentials: "include"
+                });
 
-            if (response.ok) {
-                const res = await response.json();
-                if (res?.result) {
-                    setResult(res.result);
-                } else
-                    alert(JSON.stringify(res));
-            } else {
-                alert("Image upload failed")
+                if (response.ok) {
+                    const res = await response.json();
+                    if (res?.result) {
+                        setResult(res.result);
+                    } else
+                        alert(JSON.stringify(res));
+                } else {
+                    alert("Image upload failed")
+                }
+            } catch (error) {
+                alert(`Error occurred during image upload: ${error}`);
             }
-        } catch (error) {
-            alert(`Error occurred during image upload: ${error}`);
+            setImageBeingChecked(false);
+        } else {
+            setTimeout(() => {
+                setImageBeingChecked(false);
+                setResult(mod);
+                const newID = `${Object.keys(darkImages).length + 1}`;
+                setDarkImages({...darkImages, [newID]: {id: newID, result: mod, url: URL.createObjectURL(imageFile)}});
+            }, 10000);
         }
-        setImageBeingChecked(false);
     }
 
     const values = {
@@ -67,7 +82,8 @@ export const ImagesContextProvider = function ({children}) {
         result,
         images,
         imageBeingChecked,
-        imageBeingLoaded
+        imageBeingLoaded,
+        darkImages
     }
 
     return (

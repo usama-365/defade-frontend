@@ -5,15 +5,17 @@ import {UilChannel} from "@iconscout/react-unicons";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/user.context";
 import {Link, useLocation} from "react-router-dom";
+import {ModeContext} from "../../contexts/mode.context";
 
 const expandBreakPoint = 'sm';
 
 export const Navigation = function () {
     const {user} = useContext(UserContext);
+    const {dark} = useContext(ModeContext);
     const route = useLocation().pathname;
     return (
         <>
-            <Navbar sticky={"top"} expand={expandBreakPoint} bg="dark" variant="dark">
+            <Navbar sticky={"top"} className={dark ? "shadow" : ""} expand={expandBreakPoint} bg={"dark"} variant={'dark'}>
                 <Container>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expandBreakPoint}`}/>
                     <Navbar.Brand>

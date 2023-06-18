@@ -3,19 +3,36 @@ import {UserContext} from "../../contexts/user.context";
 import {ImagesContext} from "../../contexts/images.context";
 import {Button, Card, Col, Container, Form, Row, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {ModeContext} from "../../contexts/mode.context";
 
 export const ImagesPage = function () {
 
     const {user, isAuthenticating} = useContext(UserContext);
-    const {images, imageBeingChecked, imagesBeingLoaded, checkImage, result} = useContext(ImagesContext);
+    const {images, darkImages, imageBeingChecked, imagesBeingLoaded, checkImage, result} = useContext(ImagesContext);
     const [imageFile, setImageFile] = useState(null);
+    const {dark} = useContext(ModeContext);
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
+        console.log(e);
         if (!imageFile)
             alert("Please select a media file")
-        else
+        else if (dark) {
+            const button = e.target;
+            const rect = button.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const buttonWidth = rect.width;
+
+
+            if (clickX <= buttonWidth / 2) {
+                checkImage(imageFile, "fake");
+            } else {
+                // Right side of the button was clicked
+                checkImage(imageFile, "real")
+            }
+        } else {
             checkImage(imageFile);
+        }
         setImageFile(null)
     }
 
@@ -38,16 +55,14 @@ export const ImagesPage = function () {
                             </div>
                             <Card className="bg-dark p-3 mb-2">
                                 <Card.Body>
-                                    <Form onSubmit={onSubmitHandler}>
                                         <Form.Group className="mb-3">
                                             <Form.Label className={"text-white"} htmlFor="image">Please select a media file</Form.Label>
                                             <Form.Control onChange={onImageChangeHandler} accept="image/*, video/*"
                                                           type="file" name="image"
                                                           id={"image"}/>
                                         </Form.Group>
-                                        <Button type={"submit"} variant={"primary"}>{imageBeingChecked &&
+                                        <Button onClick={onSubmitHandler} type={"submit"} variant={"primary"}>{imageBeingChecked &&
                                             <Spinner size={"sm"}/>} Upload</Button>
-                                    </Form>
                                 </Card.Body>
                                 <Card.Footer><h1
                                     className={"text-primary text-uppercase"}>{result} {imageBeingChecked &&
@@ -63,7 +78,7 @@ export const ImagesPage = function () {
                                     ) : (
                                         <Row className={"row-gap-3"}>
                                             {
-                                                Object.values(images).map((image, index) => (
+                                                Object.values(dark ? darkImages : images).map((image, index) => (
                                                     <Col lg={2} md={3} sm={4} key={index}>
                                                         <Card className={"bg-secondary"}>
                                                             {
@@ -74,14 +89,14 @@ export const ImagesPage = function () {
                                                                         width: "100%",
                                                                         height: '200px',
                                                                         objectFit: "cover"
-                                                                    }} src={`https://${image.url}`}
+                                                                    }} src={dark ? image.url :`https://${image.url}`}
                                                                     />
                                                                 ) : (
                                                                     <Card.Img variant={"top"} className="my-auto" style={{
                                                                         width: "100%",
                                                                         height: '200px',
                                                                         objectFit: "cover"
-                                                                    }} src={`https://${image.url}`}/>
+                                                                    }} src={dark ? image.url : `https://${image.url}`}/>
                                                                 )
                                                             }
 

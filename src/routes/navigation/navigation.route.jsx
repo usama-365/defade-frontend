@@ -1,6 +1,6 @@
 import "./navigation.styles.scss";
 
-import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
+import {Alert, Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import {UilChannel} from "@iconscout/react-unicons";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/user.context";
@@ -15,6 +15,7 @@ export const Navigation = function () {
     const route = useLocation().pathname;
     return (
         <>
+            <Alert variant={'secondary'}>Project has been discontinued. Backend server is down.</Alert>
             <Navbar sticky={"top"} className={dark ? "shadow" : ""} expand={expandBreakPoint} bg={"dark"} variant={'dark'}>
                 <Container>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expandBreakPoint}`}/>
